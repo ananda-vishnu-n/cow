@@ -1,0 +1,18 @@
+/* Small-screen refinements kept separate so breakpoint changes remain easy to edit. */
+@media (max-width: 619px) {
+  .section { padding: 64px 0; }
+  .hero { min-height: 680px; }
+  .hero-content { padding: 72px 0 100px; }
+  .hero-actions .btn { width: 100%; }
+  .hero-note { margin-top: 34px; }
+  .page-hero { min-height: 300px; }
+  .page-hero .hero-content { padding: 64px 0 78px; }
+  .card { padding: 20px; }
+  .support-box, .form-card { padding: 22px; }
+  .bank-row { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .bank-row strong { text-align: left; }
+  .lightbox-prev, .lightbox-next { top: auto; bottom: 12px; transform: none; }
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
+  .lightbox-close { top: 10px; right: 10px; }
+}
