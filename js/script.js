@@ -168,7 +168,43 @@ function initContactForm() {
       return;
     }
 
-    showMessage('Thanks for reaching out. This demo form is validated locally and is not connected to email yet.', 'success');
+        // Create WhatsApp message
+    const whatsappMessage =
+`*New Contact Form Submission*
+
+*Name:* ${name}
+*Email:* ${email}
+*Phone:* ${phone}
+*Subject:* ${subject}
+
+*Message:*
+${body}`;
+
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+
+    // WhatsApp numbers
+    const number1 = '919446729818';
+    const number2 = '919443364448';
+
+    // Open WhatsApp for the first number
+    window.open(
+      `https://wa.me/${number1}?text=${encodedMessage}`,
+      '_blank'
+    );
+
+    // Open WhatsApp for the second number
+    setTimeout(() => {
+      window.open(
+        `https://wa.me/${number2}?text=${encodedMessage}`,
+        '_blank'
+      );
+    }, 1000);
+
+    showMessage(
+      'Your message has been prepared in WhatsApp.',
+      'success'
+    );
+
     form.reset();
   });
 }
