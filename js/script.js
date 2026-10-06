@@ -137,8 +137,9 @@ function initGallery() {
 }
 
 function initContactForm() {
-  const form = document.querySelector('#contact-form');
+  const form = document.querySelector('#contactForm');
   const message = document.querySelector('#form-message');
+
   if (!form || !message) return;
 
   const showMessage = (text, type) => {
@@ -148,27 +149,74 @@ function initContactForm() {
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+
     const name = form.fullName.value.trim();
     const email = form.email.value.trim();
     const phone = form.phone.value.trim();
     const subject = form.subject.value.trim();
     const body = form.message.value.trim();
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const phoneDigits = phone.replace(/\D/g, '');
 
     const errors = [];
-    if (name.length < 2) errors.push('Please enter your full name.');
-    if (!emailOk) errors.push('Please enter a valid email address.');
-    if (phoneDigits.length < 10 || phoneDigits.length > 15) errors.push('Please enter a valid phone number.');
-    if (subject.length < 3) errors.push('Please enter a subject.');
-    if (body.length < 20) errors.push('Please write at least 20 characters in your message.');
 
+    // Full name validation
+    const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[\s'-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+
+    if (!name) {
+      errors.push('Please enter your full name.');
+    } else if (name.length < 2) {
+      errors.push('Full name must contain at least 2 characters.');
+    } else if (name.length > 60) {
+      errors.push('Full name is too long.');
+    } else if (!nameRegex.test(name)) {
+      errors.push('Please enter a valid full name.');
+    }
+
+    // Email validation
+    const emailRegex =
+      /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/;
+
+    if (!email) {
+      errors.push('Please enter your email address.');
+    } else if (!emailRegex.test(email)) {
+      errors.push('Please enter a valid email address.');
+    }
+
+    // Phone validation
+    const phoneClean = phone.replace(/[\s()-]/g, '');
+
+    // Accepts:
+    // 9446729818
+    // 919446729818
+    // +919446729818
+    const phoneRegex = /^(?:\+91|91)?[6-9]\d{9}$/;
+
+    if (!phone) {
+      errors.push('Please enter your phone number.');
+    } else if (!phoneRegex.test(phoneClean)) {
+      errors.push('Please enter a valid Indian phone number.');
+    }
+
+    // Subject validation
+    if (!subject) {
+      errors.push('Please enter a subject.');
+    } else if (subject.length < 3) {
+      errors.push('Subject must contain at least 3 characters.');
+    }
+
+    // Message validation
+    if (!body) {
+      errors.push('Please enter your message.');
+    } else if (body.length < 20) {
+      errors.push('Please write at least 20 characters in your message.');
+    }
+
+    // Stop if validation failed
     if (errors.length) {
       showMessage(errors.join(' '), 'error');
       return;
     }
 
-        // Create WhatsApp message
+    // Create WhatsApp message
     const whatsappMessage =
 `*New Contact Form Submission*
 
