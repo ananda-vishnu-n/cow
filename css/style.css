@@ -1319,3 +1319,15 @@ body.lightbox-open {
   display: inline-block;
   margin-bottom: 3px;
 }
+
+.footer-links .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.footer-links .icon svg {
+    width: 20px;
+    height: 20px;
+}
