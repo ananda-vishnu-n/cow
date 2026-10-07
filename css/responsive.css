@@ -1,6 +1,9 @@
 /* Small-screen refinements kept separate so breakpoint changes remain easy to edit. */
 @media (max-width: 619px) {
   .section { padding: 64px 0; }
+  .grid-4 {
+    grid-template-columns: 1fr;
+}
   .hero { min-height: 680px; }
   .hero-content { padding: 72px 0 100px; }
   .hero-actions .btn { width: 100%; }
