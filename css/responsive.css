@@ -1,6 +1,10 @@
 /* Small-screen refinements kept separate so breakpoint changes remain easy to edit. */
 @media (max-width: 619px) {
   .section { padding: 64px 0; }
+  .facility-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
   .grid-4 {
     grid-template-columns: 1fr;
 }
